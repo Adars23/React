@@ -25,7 +25,7 @@ jobs:
           source: "build/*"
           target: "/srv/www/"
       - name: SSH into droplet and restart Apache2
-        uses: appleboy/ssh-actioin@v0.5.0
+        uses: appleboy/ssh-action@v0.5.0
         with:
           host: ${{secrets.APACHE_HOST}}
           username: ${{secrets.APACHE_USERNAME}}
