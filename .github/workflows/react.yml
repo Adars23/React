@@ -23,7 +23,7 @@ jobs:
           username: ${{secrets.APACHE_USERNAME}}
           key: ${{secrets.DO_SSH_PRIVATE_KEY}}
           source: "build/*"
-          target: "/srv/www/"
+          target: "/var/www/"
       - name: SSH into droplet and restart Apache2
         uses: appleboy/ssh-action@v1.0.0
         with:
