@@ -17,14 +17,23 @@ jobs:
         env:
           CI: false
       - name: Copy files to Droplet(Apache2)
-        run: |
-          echo ${{ secrets.DROPLET_SSH_KEY }}
-          scp -i ${{ secrets.DROPLET_SSH_KEY }} -r build/* ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_HOST }}:${{ secrets.DROPLET_REMOTE_PATH }}
-      - name: SSH into droplet and restart Apache2
-        uses: appleboy/ssh-action@v1.0.0
+      - name: copy file via ssh key
+        uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{secrets.APACHE_HOST}}
-          username: ${{secrets.APACHE_USERNAME}}
-          key: ${{secrets.DO_SSH_PRIVATE_KEY}}
-          script: |
-            sudo service apache2 restart
+          host: ${{ secrets.DROPLET_HOST }}
+          username: ${{ secrets.DROPLET_USERNAME }}
+          port: ${{ secrets.DROPLET_PORT }}
+          key: ${{ secrets.DROPLET_SSH_KEY }}
+          source: build/*
+          target: /var/www/html/build
+      #   run: |
+      #     echo ${{ secrets.DROPLET_SSH_KEY }}
+      #     scp -i ${{ secrets.DROPLET_SSH_KEY }} -r build/* ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_HOST }}:${{ secrets.DROPLET_REMOTE_PATH }}
+      # - name: SSH into droplet and restart Apache2
+      #   uses: appleboy/ssh-action@v1.0.0
+      #   with:
+      #     host: ${{secrets.APACHE_HOST}}
+      #     username: ${{secrets.APACHE_USERNAME}}
+      #     key: ${{secrets.DO_SSH_PRIVATE_KEY}}
+      #     script: |
+      #       sudo service apache2 restart
