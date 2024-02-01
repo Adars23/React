@@ -17,7 +17,8 @@ jobs:
         env:
           CI: false
       - name: Copy files to Droplet(Apache2)
-        run: | 
+        run: |
+          echo $secrets.DROPLET_SSH_KEY
           scp -i ${{ secrets.DROPLET_SSH_KEY }} -r build/* ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_HOST }}:${{ secrets.DROPLET_REMOTE_PATH }}
       - name: SSH into droplet and restart Apache2
         uses: appleboy/ssh-action@v1.0.0
