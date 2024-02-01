@@ -16,14 +16,9 @@ jobs:
       - run: npm run build
         env:
           CI: false
-      - name: Copy files to Droplet
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{secrets.APACHE_HOST}}
-          username: ${{secrets.APACHE_USERNAME}}
-          key: ${{secrets.DO_SSH_PRIVATE_KEY}}
-          source: "build/*"
-          target: "/var/www/"
+      - name: Copy files to Droplet(Apache2)
+        run: | 
+          scp -i ${{ secrets.DROPLET_SSH_KEY }} -r build/* ${{ secrets.DROPLET_USERNAME }}@${{ secrets.DROPLET_HOST }}:${{ secrets.DROPLET_REMOTE_PATH }}
       - name: SSH into droplet and restart Apache2
         uses: appleboy/ssh-action@v1.0.0
         with:
