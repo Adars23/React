@@ -26,11 +26,6 @@ jobs:
           key: ${{ secrets.DROPLET_SSH_KEY }}
           source: build/*
           target: /var/www/html/build
-      - name: SSH into droplet and restart Apache2
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{secrets.APACHE_HOST}}
-          username: ${{secrets.APACHE_USERNAME}}
-          key: ${{secrets.DO_SSH_PRIVATE_KEY}}
           script: |
             sudo service apache2 restart
+          
