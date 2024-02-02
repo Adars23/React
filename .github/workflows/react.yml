@@ -16,7 +16,7 @@ jobs:
       - run: npm run build
         env:
           CI: false
-      #- name: Copy files to Droplet(Apache2)qq
+      #- name: Copy files to Droplet(Apache2)
       - name: copy file via ssh key
         uses: appleboy/scp-action@v0.1.7
         with:
