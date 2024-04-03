@@ -19,13 +19,3 @@ jobs:
       #- name: Copy files to Droplet(Apache2)
       - name: copy file via ssh key
         uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.DROPLET_HOST }}
-          username: ${{ secrets.DROPLET_USERNAME }}
-          port: ${{ secrets.DROPLET_PORT }}
-          key: ${{ secrets.DROPLET_SSH_KEY }}
-          source: build/*
-          target: /var/www/html/build
-          script: |
-            sudo service apache2 restart
-          
