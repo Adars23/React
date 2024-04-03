@@ -18,4 +18,4 @@ jobs:
           CI: false
       #- name: Copy files to Droplet(Apache2)
       - name: copy file via ssh key
-        uses: appleboy/scp-action@v0.1.7
+        uses: Adars23/scp-actions
